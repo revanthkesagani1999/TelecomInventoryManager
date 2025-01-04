@@ -2,11 +2,33 @@ import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Mock user: { role: 'Admin', name: 'John' }
+// Mock user data
+const mockUsers = [
+  { username: 'admin', password: 'admin123', role: 'Admin' },
+  { username: 'manager', password: 'manager123', role: 'Manager' },
+  { username: 'staff', password: 'staff123', role: 'Staff' },
+];
 
-  const login = (userData) => setUser(userData);
-  const logout = () => setUser(null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  const login = (username, password) => {
+    // Check if the username and password match a mock user
+    const authenticatedUser = mockUsers.find(
+      (mockUser) => mockUser.username === username && mockUser.password === password
+    );
+
+    if (authenticatedUser) {
+      setUser({ username: authenticatedUser.username, role: authenticatedUser.role });
+      return { success: true, role: authenticatedUser.role };
+    } else {
+      return { success: false };
+    }
+  };
+
+  const logout = () => {
+    setUser(null);
+  };
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>

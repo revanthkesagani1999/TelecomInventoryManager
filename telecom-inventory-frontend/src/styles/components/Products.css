@@ -5,47 +5,28 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .products h1 {
-    color: #0073e6;
-    font-size: 2rem;
-    margin-bottom: 20px;
+  .product-form input,
+  .search-bar {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
   }
   
-  .products-list {
-    margin-top: 20px;
-  }
-  
-  .products-item {
+  .product-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
   }
   
-  .products-item:last-child {
-    border-bottom: none;
-  }
-  
-  .products-item span {
-    font-size: 1.1rem;
-    color: #333;
-  }
-  
-  .products-item button {
-    padding: 5px 10px;
-    background-color: #0073e6;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .products-item button:hover {
-    background-color: #005bb5;
+  .import-export {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
   }
   

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/components/Login.css';
+
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const { login } = useAuth();
@@ -9,9 +10,16 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Mock login
-    login({ role: 'Admin', username: credentials.username });
-    navigate('/dashboard');
+    const { success, role } = login(credentials.username, credentials.password);
+
+    if (success) {
+      // Navigate based on role
+      if (role === 'Admin') navigate('/dashboard');
+      if (role === 'Manager') navigate('/products');
+      if (role === 'Staff') navigate('/dashboard');
+    } else {
+      alert('Invalid username or password');
+    }
   };
 
   return (
@@ -23,12 +31,14 @@ const Login = () => {
           placeholder="Username"
           value={credentials.username}
           onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+          required
         />
         <input
           type="password"
           placeholder="Password"
           value={credentials.password}
           onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+          required
         />
         <button type="submit">Login</button>
       </form>
